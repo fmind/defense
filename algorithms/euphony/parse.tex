@@ -1,0 +1,20 @@
+\begin{algorithmic}[1]
+    \State $Mapping \gets [name, type, platform, information]$
+    \Function{Parse}{$knowledge_{db}$, $heuristics$, $labels$}
+    \State $mappings \gets \Call{map}{Mapping, labels}$
+    \State $pqueue \gets \Call{prio-queue}{mappings}$
+    \While{\Call{not-empty?}{$pqueue$}}
+    \State $m \gets \Call{peek}{pqueue}$
+    \For{$H$ in $heuristics$}
+    \State $findings \gets \Call{h}{knowledge_{db}, m}$
+    \State $\Call{merge}{m, findings}$
+    \EndFor
+    \If{\Call{complete?}{$m$}}
+    \State \Call{Enrich}{$knowledge_{db}, m$}
+    \Else
+    \State \Call{Push}{$pqueue, m$}
+    \EndIf
+    \EndWhile
+    \State \Return $mappings$
+    \EndFunction
+\end{algorithmic}

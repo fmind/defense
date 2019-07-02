@@ -1,0 +1,48 @@
+% marks
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+% themes
+\usetheme{Warsaw}
+\usefonttheme{serif}
+\usecolortheme{seagull}
+
+% blocks
+% \setbeamercolor{block body}{bg=white}
+% \setbeamertemplate{blocks}[rounded][shadow=false]
+
+% colors
+\definecolor{RED}{rgb}{0.76, 0.23, 0.13}
+\definecolor{BLUE}{rgb}{0.47, 0.62, 0.8}
+\definecolor{GREEN}{rgb}{0.01, 0.75, 0.24}
+
+% fillings
+\def\dotfill#1{\cleaders\hbox to #1{.}\hfill}
+\newcommand\dotline[2][.5em]{\leavevmode\hbox to #2{\dotfill{#1}\hfil}}
+
+% captions
+\setlength\abovecaptionskip{3pt}
+\setbeamertemplate{caption}[numbered]
+\captionsetup[table]{labelformat=empty}
+\captionsetup[figure]{labelformat=empty}
+\captionsetup[algorithm]{labelformat=empty}
+\captionsetup[table]{justification=centering}
+\captionsetup[figure]{justification=centering}
+\captionsetup[algorithm]{justification=centering}
+
+% symbols
+\beamertemplatenavigationsymbolsempty{}
+\addtobeamertemplate{navigation symbols}{}{
+    \tiny{\insertframenumber{} / \inserttotalframenumber{}}
+}
+
+% sections
+\AtBeginSection[]{
+    \begin{frame}
+        \frametitle{Table of contents}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+% programs
+\algrenewcommand\alglinenumber[1]{\tiny #1:}

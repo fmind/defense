@@ -1,0 +1,307 @@
+\subsection[EUPHONY]{EUPHONY:~unification of malware labels}
+
+\begin{frame}
+    \frametitle{Why do we need to unify malware labels?}
+    \centering
+
+    We cannot access antivirus descriptions with simple techniques
+
+    \vspace{-10pt}
+
+    \begin{table}[!ht]
+        \resizebox{\textwidth}{!}{
+            \textit{
+                \input{tables/euphony/cacophonous.tex}
+            }
+        }
+    \end{table}
+
+    \vspace{-10pt}
+
+    \begin{figure}[!ht]
+        \includegraphics[height=0.65\textheight]{figures/euphony/rosette.png}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \vfill
+    \centering
+    \usebeamerfont{title}
+
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+        \textbf{EUPHONY}:\\
+        unification of malware labels
+
+        \small{}
+
+        \bigskip{}
+
+        \textit{
+            Euphony: Harmonious Unification of Cacophonous \\
+            Anti-Virus Vendor Labels for Android Malware}
+
+        \medskip{}
+
+        The 14th International Conference on \\
+        Mining Software Repositories (MSR)
+    \end{beamercolorbox}
+
+    \vfill
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reminders and methodology}
+
+    \begin{columns}
+        \begin{column}{0.3\textwidth}
+            \begin{figure}[!ht]
+                \includegraphics[width=0.95\textwidth]{figures/euphony/tag.jpg}
+            \end{figure}
+        \end{column}
+
+        \begin{column}{0.81\textwidth}
+            \begin{block}{}
+                \centering
+                \textbf{Reminders}
+            \end{block}
+            \begin{itemize}
+                \item Antivirus help experts to create ground truths
+                \begin{itemize}
+                    \item e.g., type, family, platform, information \ldots
+                \end{itemize}
+                \item But labels include syntactic and semantic errors
+                \item How to retrieve the words embedded in labels?
+            \end{itemize}
+
+            \begin{block}{}
+                \centering
+                \textbf{Methodology}
+            \end{block}
+            \begin{itemize}
+                \item Develop a program to parse and cluster labels
+                \item Compare our approach against state-of-the-art
+                \item Investigate the label families retrieved from:
+                \begin{itemize}
+                    \item Genome, Drebin, and Androzoo datasets
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Input and Output}
+
+    \begin{figure}
+        \vspace{-5pt}
+        \includegraphics[width=0.8\textwidth]{figures/euphony/architecture-zero.jpg}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{EUPHONY architecture}
+
+    \begin{figure}
+        \vspace{-5pt}
+        \includegraphics[width=0.8\textwidth]{figures/euphony/architecture.pdf}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{EUPHONY architecture}
+
+    \begin{figure}
+        \vspace{-5pt}
+        \includegraphics[width=0.8\textwidth]{figures/euphony/architecture-first.pdf}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stage 1: extraction of label fields}
+    \centering
+    \begin{figure}[!ht]
+        \includegraphics[width=0.7\textwidth]{figures/euphony/label.pdf}
+    \end{figure}
+
+    \vspace{-20pt}
+
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{algorithm}[H]
+                \tiny
+                \input{algorithms/euphony/parse.tex}
+                \caption{\footnotesize{Incremental parsing of malware labels}}
+            \end{algorithm}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \vspace{10pt}
+            \begin{table}[!ht]
+                \caption{\footnotesize{Heuristics for mapping label tokens}}
+                \vspace{-15pt}
+                \resizebox{\textwidth}{!}{
+                    \input{tables/euphony/heuristics.tex}
+                }
+            \end{table}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{EUPHONY architecture}
+
+    \begin{figure}
+        \vspace{-5pt}
+        \includegraphics[width=0.8\textwidth]{figures/euphony/architecture-second.pdf}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stage 2 and 3: clustering and selection of family names}
+    \vspace{-15pt}
+    \small
+
+    \begin{equation*}
+        W(x, y) = 
+        (1 - \frac{|x \cap y|}{\min(|x|, |y|)}) +
+        \frac{1}{10} \times (1 - \frac{\min(|x|, |y|)}{\max(|x|, |y|)}) +
+        \frac{1}{100} \times (1 - dice(x, y))
+    \end{equation*}
+
+    \begin{figure}
+        \vspace{-10pt}
+        \hspace*{-25pt}
+        \includegraphics[width=1.05\textwidth]{figures/euphony/clustering.pdf}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Datasets and evaluation against state-of-the-art}
+    \centering
+
+    \begin{block}{}
+        \centering
+        \textbf{Datasets}
+    \end{block}
+    \smallskip{}
+    \begin{table}[!ht]
+        \resizebox{0.8\textwidth}{!}{
+            \input{tables/euphony/datasets.tex}
+        }
+        \caption{\footnotesize{Malware ground truths analyzed for the evaluation of EUPHONY}}
+    \end{table}
+
+    \vspace{-15pt}
+
+    \begin{block}{}
+        \centering
+        \textbf{Evaluation}
+    \end{block}
+    \smallskip{}
+    {\em AVClass} is a labeling tool that outputs the most likely family \\
+    \smallskip{}
+    It requires a \underline{ground truth} to generate generics and aliases tokens
+
+    \vspace{-10pt}
+
+    \begin{table}
+        \resizebox{\textwidth}{!}{
+            \input{tables/euphony/results.tex}
+        }
+        \caption{\footnotesize{{Performance of EUPHONY against 3 {\em AVClass} configurations (in \%)}}}
+    \end{table}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Investigation of Androzoo dataset (no ground truth)}
+    \centering
+
+    \begin{table}[!ht]
+        \resizebox{0.6\textwidth}{!}{
+            \input{tables/euphony/androzoo.tex}
+        }
+        \caption{\footnotesize{Results of EUPHONY and {\em AVClass} (402~600 samples)}}
+    \end{table}
+
+    \vspace{-10pt}
+
+    EUPHONY found more labels and more clusters
+
+    \medskip{}
+
+    \begin{table}[!ht]
+        \resizebox{0.65\textwidth}{!}{
+            \input{tables/euphony/families.tex}
+        }
+        \caption{\footnotesize{Top 10 clusters of EUPHONY compared to {\em AVClass}}}
+    \end{table}
+
+    \vspace{-11pt}
+
+    EUPHONY clusters seem more granular overall
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Contributions and conclusions}
+    \centering
+
+    \begin{block}{}
+        \centering
+        \textbf{Contributions}
+    \end{block}
+    \begin{itemize}
+        \item Retrieve information from antivirus labels 
+        \item Explore relations between antivirus families 
+        \item Propose a single family name for experiments 
+    \end{itemize}
+
+    \begin{block}{}
+        \centering
+        \textbf{Conclusions}
+    \end{block}
+    \begin{itemize}
+        \item Information from labels are not sufficient on their own
+        \item Malware families provide a guideline for a new approach
+        \begin{itemize}
+            \item i.e., malware from the same family have the same behaviors
+        \end{itemize}
+    \end{itemize}
+
+    \vspace{8pt}
+    \small{}
+
+    \textbf{How can we reify malicious behaviors from malware families?}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{How to improve the security of Android}
+
+    \begin{tabularx}{\textwidth}{l r}
+        \multicolumn{2}{c}{\textbf{Challenge 1:~Definition of Android malware}\vspace{5pt}} \\
+        \textbullet~Verify the quality of antivirus results & \textcolor{RED}{STASE} \\
+        \textbullet~Retrieve information from antivirus labels & \textcolor{GREEN}{EUPHONY} \\
+        \dotline{250pt} & \\
+        \\
+        \multicolumn{2}{c}{\textbf{Challenge 2:~Detection of Android malware}\vspace{5pt}} \\
+        \textbullet~Study the impacts of ground truth settings & \textcolor{RED}{STASE} \\
+        \textbullet~Propose a single family name for experiments & \textcolor{GREEN}{EUPHONY} \\
+        \dotline{250pt} & \\
+        \\
+        \multicolumn{2}{c}{\textbf{Challenge 3:~Comprehension of Android malware}\vspace{5pt}} \\
+        \textbullet~View the properties of malware ground truths & \textcolor{RED}{STASE} \\
+        \textbullet~Explore relations between antivirus families & \textcolor{GREEN}{EUPHONY} \\
+        \dotline{250pt} & \\
+    \end{tabularx}
+
+\end{frame}

@@ -1,0 +1,64 @@
+\section{Background}
+
+\subsection[Why]{Malware ground truths: Why}
+
+\begin{frame}
+    \frametitle{Why do we need better malware ground truth?}
+    \centering
+
+    Malware ground truths are essential for the definition, \\
+    the detection and the comprehension of Android malware
+
+    \begin{figure}[!ht]
+        \includegraphics[width=\textwidth]{figures/background/triforce.jpg}
+    \end{figure}
+
+\end{frame}
+
+\subsection[What]{Malware ground truths: What}
+
+\begin{frame}
+    \frametitle{What are malware ground truth in practice?}
+    \centering
+
+    \textbf{Malware ground truth} = application dataset + metadata
+
+    \begin{table}[t]
+        \resizebox{\textwidth}{!}{
+            \input{tables/background/example.tex}
+        }
+        \caption{\footnotesize{Example of a malware ground truth composed of 8 malicious applications}}
+    \end{table}
+
+    Information about malware can be found in \textbf{antivirus labels}: \\
+    e.g., Click-Fraud:Android/FakeNetflix.alpha
+
+\end{frame}
+
+\subsection[Where]{Malware ground truths: Where}
+
+\begin{frame}
+    \frametitle{Where can we find malware ground truths?}
+
+    \begin{block}{}
+        \centering
+        \textbf{Datasets from research projects}
+    \end{block}
+    \vspace{-15pt}
+    \begin{table}[t]
+        \resizebox{\textwidth}{!}{
+            \input{tables/background/research.tex}
+        }
+    \end{table}
+
+    \begin{block}{}
+        \centering
+        \textbf{Datasets from industrial projects}
+    \end{block}
+    \begin{table}[t]
+        \resizebox{\textwidth}{!}{
+            \input{tables/background/industrial.tex}
+        }
+    \end{table}
+
+\end{frame}
